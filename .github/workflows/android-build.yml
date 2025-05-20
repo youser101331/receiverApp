@@ -8,21 +8,25 @@ on:
 
 jobs:
   build:
-    - name: Set permissions for Gradle Wrapper
-        run: chmod +x gradle/wrapper/gradle-wrapper.jar
-   
-      - name: Build APK
-        run: ./gradlew assembleDebug
+    name: Build APK
+    runs-on: ubuntu-latest
 
     steps:
-           - name: Make gradlew executable
-             run: chmod +x ./gradlew
+      - name: Set permissions for Gradle Wrapper
+        run: chmod +x gradle/wrapper/gradle-wrapper.jar
+        
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+        
+      - name: Build APK
+        run: ./gradlew assembleDebug
 
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
+
         with:
           distribution: 'temurin'
           java-version: 17
